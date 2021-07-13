@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 ###############################
 # Define input stimulation
 ###############################
-# TODO: Set a variable called stv to 4, this will define 
+# TODO: Set a variable called stv to 4, this will define
 #        the weight of the connection from input to output
 stv = 4
 
@@ -39,7 +39,7 @@ y = np.zeros((1, nTs))  # set up (define) a vector for the output time series
 #        the output at each time step. Ex:
 for ts in range(0, nTs):
     if ts != 0 and x[ts - 1] > 0:
-        v *= .5
+        v *= .7
     y[0, ts] = v * x[ts]
 
 
