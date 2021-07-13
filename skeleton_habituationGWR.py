@@ -16,58 +16,58 @@ import matplotlib.pyplot as plt
 ###############################
 # TODO: Set a variable called stv to 4, this will define 
 #        the weight of the connection from input to output
-# stv = 
+stv = 4
 
 # TODO: set up an input pulse called pls
-# pls = 
+pls = [0, 0, 1, 0, 0]  # 5 time steps
 
 # TODO: then create a list of 6 pulses, called x, to use for input
-# x = 
+x = pls * 6
 
-v = stv # Set connection weight to start weight value
+v = stv  # Set connection weight to start weight value
 
 ###############################
 # Set up and run simulation
 ###############################
 
-nTs = len(x) # find the length of the input list
-y = np.zeros((1,nTs)) # set up (define) a vector for the output time series
+nTs = len(x)  # find the length of the input list
+y = np.zeros((1, nTs))  # set up (define) a vector for the output time series
 
-# TODO: use a for-loop to iterate 
-#        through each time step in 
+# TODO: use a for-loop to iterate
+#        through each time step in
 #        the input series and calculate
 #        the output at each time step. Ex:
-# for ...
-#     then indent 4 spaces and write the equation that
-#     describes how each input value in the vector x is 
-#     transformed to the output value in the vector y
-
+for ts in range(0, nTs):
+    if ts != 0 and x[ts - 1] > 0:
+        v *= .5
+    y[0, ts] = v * x[ts]
 
 
 ###############################
 # Plot the results
 ###############################
-def showresults(x,y,nTs,stv):
+def showresults(x, y, nTs, stv):
     # Plot both the input series (vector x)
     # and the resulting output series (vector y)
     fig = plt.figure()
     ax1 = fig.add_subplot(211)
-    ax1.plot(x) #, color='white',  antialiased=False, edgecolors='black', linewidth=1, shade=False, alpha=1)
+    ax1.plot(x)  # , color='white',  antialiased=False, edgecolors='black', linewidth=1, shade=False, alpha=1)
     ax1.set_ylabel('Input')
     ax1.set_xlim(0, nTs)
     ax1.set_ylim(0, 1.1)
-    
+
     ax2 = fig.add_subplot(212)
-    ax2.plot(y[0]) #, color='white',  antialiased=False, edgecolors='black', linewidth=1, shade=False, alpha=1)
+    ax2.plot(y[0])  # , color='white',  antialiased=False, edgecolors='black', linewidth=1, shade=False, alpha=1)
     ax2.set_xlabel('Time step')
     ax2.set_ylabel('Output')
     ax2.set_xlim(0, nTs)
-    ax2.set_ylim(0, stv+0.5)
-    
+    ax2.set_ylim(0, stv + 0.5)
+
     plt.show()
+
 
 # TODO prepare file for Gradescope before committing and submitting!
 # - Comment out the call to showresults below
 # - Comment out any print statements added during code development
 # - Make sure you keep x, y, pls, and other variable names the same
-showresults(x,y,nTs,stv)
+showresults(x, y, nTs, stv)
